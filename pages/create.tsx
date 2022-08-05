@@ -75,7 +75,7 @@ const CreatePage = () => {
                 return showNotification({
                   color: "red",
                   disallowClose: true,
-                  message: "Please enter a 4 number pin",
+                  message: "Please enter a 4 digit pin",
                 });
               }
 
@@ -135,6 +135,9 @@ const CreatePage = () => {
               <Input
                 autoCapitalize="off"
                 required
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck="false"
                 id="path"
                 placeholder="e.g. johndoe123"
                 {...form.getInputProps("path")}

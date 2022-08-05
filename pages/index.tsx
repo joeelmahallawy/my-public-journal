@@ -45,6 +45,11 @@ const IndexPage = () => {
                 setPersonalUrl(e.currentTarget.value);
               }}
               autoCapitalize="off"
+              autoComplete="off"
+              // autoFocus
+
+              autoCorrect="off"
+              spellCheck="false"
               description="This is the username you set when you first created your note"
               label="Your username"
             />
