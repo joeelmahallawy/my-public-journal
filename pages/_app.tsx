@@ -4,9 +4,12 @@ import { MantineProvider } from "@mantine/core";
 import React from "react";
 import { NotificationsProvider } from "@mantine/notifications";
 import { sizes } from "../helpers";
+import { GoogleAnalytics, usePageViews } from "nextjs-google-analytics";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
+
+  usePageViews();
 
   return (
     <>
@@ -30,6 +33,9 @@ export default function App(props: AppProps) {
         }}
       >
         <NotificationsProvider position="bottom-center" zIndex={2077}>
+          <GoogleAnalytics
+            gaMeasurementId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE}
+          />
           <Component {...pageProps} />
         </NotificationsProvider>
       </MantineProvider>
