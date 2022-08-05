@@ -99,7 +99,7 @@ const Page = () => {
                   autosize
                   placeholder=""
                   sx={{ width: "100%" }}
-                  label="Your journal"
+                  label="Your notes"
                 />
 
                 <Center

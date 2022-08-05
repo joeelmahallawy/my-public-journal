@@ -56,7 +56,7 @@ const CreatePage = () => {
               [phoneWidth]: { fontSize: "24px" },
             }}
           >
-            Create your own public journal
+            Create your own secure note
           </Title>
           <Text
             color="dimmed"
@@ -161,11 +161,11 @@ const CreatePage = () => {
                   {/* <Lock size={14} strokeWidth={2.5} /> */}
                   <Text color="dimmed" sx={{ alignItems: "center" }}>
                     {/* Anything you save here will be fully encrypted.  */}
-                    Possibly your friends phone numbers for emergecy purposes
+                    Maybe some friends phone numbers in case your phone dies
                   </Text>
                 </Center>
               }
-              label="Your journal"
+              label="Your notes"
               required
             />
             <Center mt={3} sx={{ justifyContent: "flex-start", gap: 1 }}>
@@ -208,7 +208,7 @@ const CreatePage = () => {
               icon={<IconCheck size={18} />}
               color="teal"
               disallowClose
-              title="You have created a new journal"
+              title="You have created a new note"
             >
               Here's your url:{" "}
               <Anchor href={`${getEnvironmentURL()}/${finalPath}`}>

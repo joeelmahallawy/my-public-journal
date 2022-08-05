@@ -39,7 +39,7 @@ const IndexPage = () => {
               onChange={(e) => {
                 setPersonalUrl(e.currentTarget.value);
               }}
-              description="This is the username you set when you created your personal journal"
+              description="This is the username you set when you first created your note"
               label="Your username"
             />
             <Anchor href={`${getEnvironmentURL()}/${personalUrl}`}>
@@ -57,11 +57,9 @@ const IndexPage = () => {
               What would you like to do?
             </Title>
             <Center sx={{ gap: 10 }} mt="1%">
-              <Button onClick={() => setShowSearch(true)}>
-                Check my journal
-              </Button>
+              <Button onClick={() => setShowSearch(true)}>Check my note</Button>
               <a href="/create">
-                <Button color="green">Create a new journal</Button>
+                <Button color="green">Create a new note</Button>
               </a>
             </Center>
           </>
