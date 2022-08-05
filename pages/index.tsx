@@ -38,7 +38,6 @@ const IndexPage = () => {
               width: "30%",
             }}
           >
-            {/* <Title>What is your </Title> */}
             <TextInput
               mb={10}
               placeholder="e.g. johndoe123"
