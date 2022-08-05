@@ -68,6 +68,7 @@ const CreatePage = () => {
           </Text>
           <form
             onSubmit={form.onSubmit(async (values) => {
+              console.log(values);
               setIsLoading(true);
               if (values.pin.length !== 4) {
                 setIsLoading(false);
@@ -187,11 +188,11 @@ const CreatePage = () => {
 
             <Input.Wrapper mt={10} id="pin" label="Pin" required>
               <PinInput
-                // id="pin"
+                id="pin"
                 length={4}
                 initialValue=""
                 // secret
-                // {...form.getInputProps("pin")}
+                {...form.getInputProps("pin")}
                 type="numeric"
                 inputMode="number"
                 inputStyle={{ borderColor: "black" }}
