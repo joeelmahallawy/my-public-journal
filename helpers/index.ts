@@ -4,7 +4,7 @@ import crypto from "crypto";
 export const getEnvironmentURL = (): string =>
   process.env.NODE_ENV === "production"
     ? "http://localhost:3000"
-    : "http://localhost:3000";
+    : "https://my-public-journal.vercel.app";
 
 export const encrypt = (text: string): string => {
   const iv = crypto.randomBytes(16);
