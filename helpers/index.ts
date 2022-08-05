@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 export const getEnvironmentURL = (): string =>
   process.env.NODE_ENV === "production"
-    ? "mysecurenote.com"
+    ? "https://www.mysecurenote.com"
     : "http://localhost:3000";
 
 export const encrypt = (text: string): string => {

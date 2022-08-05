@@ -226,7 +226,7 @@ const CreatePage = () => {
             >
               Here's your url:{" "}
               <Anchor href={`${getEnvironmentURL()}/${finalPath}`}>
-                {getEnvironmentURL()}/{finalPath}
+                {getEnvironmentURL().replace("https://www.", "")}/{finalPath}
               </Anchor>
             </Notification>
           )}

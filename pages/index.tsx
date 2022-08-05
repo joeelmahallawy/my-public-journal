@@ -54,7 +54,7 @@ const IndexPage = () => {
               label="Your username"
             />
             <Anchor href={`${getEnvironmentURL()}/${personalUrl}`}>
-              {getEnvironmentURL()}/{personalUrl}
+              {getEnvironmentURL().replace("https://www.", "")}/{personalUrl}
             </Anchor>
           </Box>
         ) : (
