@@ -15,7 +15,7 @@ import {
 import { showNotification } from "@mantine/notifications";
 
 import React, { useState } from "react";
-import { getEnvironmentURL } from "../helpers";
+import { getEnvironmentURL, phoneWidth, tabletWidth } from "../helpers";
 import { useForm } from "@mantine/form";
 import PinInput from "react-pin-input";
 import Head from "next/head";
@@ -41,11 +41,28 @@ const CreatePage = () => {
         <title>Create a page</title>
       </Head>
       <Center sx={{ flexDirection: "column" }}>
-        <Box mt={10} sx={{ width: "45%" }}>
-          <Title sx={{ textAlign: "center" }}>
+        <Box
+          mt={10}
+          sx={{
+            width: "45%",
+            [tabletWidth]: { width: "80%" },
+            [phoneWidth]: { width: "85%" },
+          }}
+        >
+          <Title
+            sx={{
+              textAlign: "center",
+              [tabletWidth]: { fontSize: "30px" },
+              [phoneWidth]: { fontSize: "24px" },
+            }}
+          >
             Create your own public journal
           </Title>
-          <Text color="dimmed" size="sm" sx={{ textAlign: "center" }}>
+          <Text
+            color="dimmed"
+            size="sm"
+            sx={{ textAlign: "center", [phoneWidth]: { fontSize: "12px" } }}
+          >
             Save some of your most urgent contacts/info in a url that you'll
             easily remember
           </Text>

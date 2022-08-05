@@ -11,7 +11,11 @@ const Error404 = () => {
       <Center sx={{ width: "100%", height: "75vh" }}>
         <Center sx={{ flexDirection: "column" }}>
           <Title>Page not found </Title>
-          <Text mt={5} sx={{ width: "100%" }} color="dimmed">
+          <Text
+            mt={5}
+            sx={{ width: "100%", textAlign: "center" }}
+            color="dimmed"
+          >
             This url doesn't belong to anyone, which means you entered the wrong
             username.
           </Text>

@@ -16,7 +16,7 @@ import {
 import { showNotification } from "@mantine/notifications";
 
 import React, { useState } from "react";
-import { getEnvironmentURL } from "../helpers";
+import { getEnvironmentURL, phoneWidth, tabletWidth } from "../helpers";
 import { useForm } from "@mantine/form";
 import PinInput from "react-pin-input";
 import Head from "next/head";
@@ -48,7 +48,14 @@ const IndexPage = () => {
           </Box>
         ) : (
           <>
-            <Title>What would you like to do?</Title>
+            <Title
+              sx={{
+                [tabletWidth]: { fontSize: "30px" },
+                [phoneWidth]: { fontSize: "24px" },
+              }}
+            >
+              What would you like to do?
+            </Title>
             <Center sx={{ gap: 10 }} mt="1%">
               <Button onClick={() => setShowSearch(true)}>
                 Check my journal

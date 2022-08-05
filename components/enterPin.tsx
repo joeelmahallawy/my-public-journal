@@ -3,6 +3,7 @@ import { Title } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import React from "react";
 import PinInput from "react-pin-input";
+import { phoneWidth, tabletWidth } from "../helpers";
 
 const EnterPin = ({
   path,
@@ -17,7 +18,14 @@ const EnterPin = ({
 }) => {
   return (
     <>
-      <Title>Please enter your secret pin</Title>
+      <Title
+        sx={{
+          [tabletWidth]: { fontSize: "30px" },
+          [phoneWidth]: { fontSize: "24px" },
+        }}
+      >
+        Please enter your secret pin
+      </Title>
       <PinInput
         length={4}
         initialValue=""

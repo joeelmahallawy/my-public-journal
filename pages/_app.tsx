@@ -3,6 +3,7 @@ import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
 import React from "react";
 import { NotificationsProvider } from "@mantine/notifications";
+import { sizes } from "../helpers";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -16,13 +17,12 @@ export default function App(props: AppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
         theme={{
-          /** Put your mantine theme override here */
           colorScheme: "light",
+          breakpoints: { ...sizes, xxxl: 1900 },
         }}
       >
         <NotificationsProvider position="bottom-center" zIndex={2077}>

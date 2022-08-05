@@ -16,7 +16,7 @@ import {
 } from "next";
 import React, { useEffect, useState } from "react";
 import { useAsyncFn } from "react-use";
-import { getEnvironmentURL } from "../helpers";
+import { getEnvironmentURL, phoneWidth, tabletWidth } from "../helpers";
 import { showNotification } from "@mantine/notifications";
 import EnterPin from "../components/enterPin";
 import ChangePin from "../components/changePin";
@@ -51,6 +51,8 @@ const Page = () => {
                 gap: 0,
                 flexDirection: "column",
                 width: "40%",
+                [tabletWidth]: { width: "80%" },
+                [phoneWidth]: { width: "80%" },
               }}
             >
               <form
