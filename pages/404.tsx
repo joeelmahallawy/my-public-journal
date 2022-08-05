@@ -1,6 +1,7 @@
 import { Box, Button, Center, Title, Text } from "@mantine/core";
 import Head from "next/head";
 import React from "react";
+import { phoneWidth, tabletWidth } from "../helpers";
 
 const Error404 = () => {
   return (
@@ -9,7 +10,13 @@ const Error404 = () => {
         <title>Page not found</title>
       </Head>
       <Center sx={{ width: "100%", height: "75vh" }}>
-        <Center sx={{ flexDirection: "column" }}>
+        <Center
+          sx={{
+            flexDirection: "column",
+            [phoneWidth]: { width: "80%" },
+            [tabletWidth]: { width: "75%" },
+          }}
+        >
           <Title>Page not found </Title>
           <Text
             mt={5}

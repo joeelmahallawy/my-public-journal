@@ -20,8 +20,8 @@ const EnterPin = ({
     <>
       <Title
         sx={{
-          [tabletWidth]: { fontSize: "30px" },
-          [phoneWidth]: { fontSize: "24px" },
+          [tabletWidth]: { fontSize: "30px", marginTop: "3%" },
+          [phoneWidth]: { fontSize: "24px", marginTop: "5%" },
         }}
       >
         Please enter your secret pin
@@ -36,6 +36,7 @@ const EnterPin = ({
         inputStyle={{ borderColor: "black" }}
         inputFocusStyle={{ borderColor: "blue" }}
         autoSelect={true}
+        regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
         onComplete={async (e) => {
           const get = await fetch(`/api/validatePin?pathName=${path}&pin=${e}`);
 
@@ -53,7 +54,6 @@ const EnterPin = ({
             setPinIsCorrect(true);
           }
         }}
-        regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
       />
     </>
   );

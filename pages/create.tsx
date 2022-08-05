@@ -45,8 +45,8 @@ const CreatePage = () => {
           mt={10}
           sx={{
             width: "45%",
-            [tabletWidth]: { width: "80%" },
-            [phoneWidth]: { width: "85%" },
+            [tabletWidth]: { width: "85%" },
+            [phoneWidth]: { width: "90%" },
           }}
         >
           <Title
@@ -95,11 +95,11 @@ const CreatePage = () => {
               setIsLoading(false);
               sethasSubmitted(true);
               setFinalPath(values.path);
-              return showNotification({
-                color: "green",
-                disallowClose: true,
-                message: "Successfully created path!",
-              });
+              // return showNotification({
+              //   color: "green",
+              //   disallowClose: true,
+              //   message: "Successfully created path!",
+              // });
             })}
           >
             {/* <Input.Wrapper mt={10} id="firstName" label="First name" required>
@@ -132,6 +132,7 @@ const CreatePage = () => {
               required
             >
               <Input
+                autoCapitalize="off"
                 required
                 id="path"
                 placeholder="e.g. johndoe123"
@@ -144,7 +145,16 @@ const CreatePage = () => {
               </Text>
             )}
             <Alert mt={10} color="green">
-              <Text weight={700} size="md">
+              <Text
+                weight={700}
+                size="sm"
+                sx={{
+                  [phoneWidth]: {
+                    fontSize: "12px",
+                    [tabletWidth]: { fontSize: "14px" },
+                  },
+                }}
+              >
                 Your current url:{" "}
                 <span style={{ fontWeight: 700 }}>
                   {getEnvironmentURL()}/{form.values.path}

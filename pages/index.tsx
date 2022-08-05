@@ -31,7 +31,13 @@ const IndexPage = () => {
       </Head>
       <Center sx={{ flexDirection: "column", width: "100%", height: "75vh" }}>
         {showSearch ? (
-          <Box>
+          <Box
+            sx={{
+              [phoneWidth]: { width: "80%" },
+              [tabletWidth]: { width: "80%" },
+              width: "30%",
+            }}
+          >
             {/* <Title>What is your </Title> */}
             <TextInput
               mb={10}
@@ -39,6 +45,7 @@ const IndexPage = () => {
               onChange={(e) => {
                 setPersonalUrl(e.currentTarget.value);
               }}
+              autoCapitalize="off"
               description="This is the username you set when you first created your note"
               label="Your username"
             />
@@ -56,7 +63,14 @@ const IndexPage = () => {
             >
               What would you like to do?
             </Title>
-            <Center sx={{ gap: 10 }} mt="1%">
+            <Center
+              sx={{
+                gap: 10,
+                [phoneWidth]: { marginTop: "2.5%" },
+                [tabletWidth]: { marginTop: "3%" },
+              }}
+              mt="1%"
+            >
               <Button onClick={() => setShowSearch(true)}>Check my note</Button>
               <a href="/create">
                 <Button color="green">Create a new note</Button>
