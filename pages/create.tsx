@@ -38,7 +38,7 @@ const CreatePage = () => {
   return (
     <>
       <Head>
-        <title>Create a page</title>
+        <title>Create a note</title>
       </Head>
       <Center sx={{ flexDirection: "column" }}>
         <Box
@@ -148,7 +148,7 @@ const CreatePage = () => {
                 Cannot have a space in your url
               </Text>
             )}
-            <Alert mt={10} color="green">
+            {/* <Alert mt={10} color="green">
               <Text
                 weight={700}
                 size="sm"
@@ -161,10 +161,11 @@ const CreatePage = () => {
               >
                 Your current url:{" "}
                 <span style={{ fontWeight: 700 }}>
-                  {getEnvironmentURL()}/{form.values.path}
+                  {getEnvironmentURL().replace("https://www.", "")}/
+                  {form.values.path}
                 </span>
               </Text>
-            </Alert>
+            </Alert> */}
             <Textarea
               autosize
               {...form.getInputProps("body")}
