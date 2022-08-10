@@ -11,10 +11,9 @@ datasource db {
 }
 
 model Page {
-  id   String @id @default(uuid())
-  // firstName String
-  pin  String
-  path String @unique
-  body String
-  // email String?
+  id       String   @id @default(uuid())
+  imageUrl String[]
+  pin      String
+  path     String   @unique
+  body     String
 }

@@ -10,11 +10,13 @@ const EnterPin = ({
   setPinIsCorrect,
   setData,
   setMyInfo,
+  setLoadedImageUrls,
 }: {
   path: string;
   setPinIsCorrect: Function;
   setData: Function;
   setMyInfo: Function;
+  setLoadedImageUrls: Function;
 }) => {
   return (
     <>
@@ -51,6 +53,7 @@ const EnterPin = ({
             });
           } else {
             setData(data);
+            setLoadedImageUrls([...data.imageUrl]);
             setMyInfo(data.body);
             setPinIsCorrect(true);
           }

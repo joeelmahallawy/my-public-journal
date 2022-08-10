@@ -1,12 +1,14 @@
 import PinInput from "react-pin-input";
 import {
   Button,
+  Image,
   Center,
   Loader,
   Title,
   Text,
   Box,
   Textarea,
+  Modal,
 } from "@mantine/core";
 import {
   GetServerSideProps,
@@ -22,8 +24,18 @@ import EnterPin from "../components/enterPin";
 import ChangePin from "../components/changePin";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { storage } from "../firebase";
+
+import DropzoneInput from "../components/dropInput";
+import { Page } from ".prisma/client";
+import { async } from "@firebase/util";
 
 const Page = () => {
+  const [opened, setOpened] = useState(false);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+
+  const [urlToDelete, setUrlToDelete] = useState("");
+
   const [pinIsCorrect, setPinIsCorrect] = useState(false);
   // supposed to be data.body
   const [myInfo, setMyInfo] = useState(undefined);
@@ -31,8 +43,9 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isChangingPin, setIsChangingPin] = useState(false);
 
-  const [data, setData] = useState(undefined);
+  const [data, setData] = useState<Page>(undefined);
 
+  const [loadedImageUrls, setLoadedImageUrls] = useState<string[]>([]);
   const router = useRouter();
 
   if (isChangingPin) return <ChangePin data={data} />;
@@ -65,6 +78,8 @@ const Page = () => {
                       data: myInfo,
                       path: data.path,
                       pin: data.pin,
+                      // NOTE: now we're passing in array of urls
+                      image: imageUrls || [],
                     }),
                   });
                   const response = await update.json();
@@ -101,7 +116,92 @@ const Page = () => {
                   sx={{ width: "100%" }}
                   label="Your notes"
                 />
+                <Modal
+                  size="sm"
+                  opened={opened}
+                  onClose={() => setOpened(false)}
+                  withCloseButton={false}
+                >
+                  <Text weight={600}>Delete image?</Text>
+                  <Center mt={5} sx={{ justifyContent: "flex-end", gap: 10 }}>
+                    <Button variant="default" onClick={() => setOpened(false)}>
+                      Cancel
+                    </Button>
+                    <Button
+                      color="red"
+                      onClick={async () => {
+                        // NOTE: check over this
+                        const deleteImage = await fetch(`/api/deleteImage`, {
+                          method: "DELETE",
+                          body: JSON.stringify({
+                            path: data.path,
+                            pin: data.pin,
+                            image: urlToDelete,
+                          }),
+                        });
+                        const deletedSuccessfully = await deleteImage.json();
 
+                        if (!deletedSuccessfully.error) {
+                          setLoadedImageUrls([
+                            ...loadedImageUrls.filter(
+                              (url) => url != urlToDelete
+                            ),
+                          ]);
+                          setOpened(false);
+                          return showNotification({
+                            color: "green",
+                            disallowClose: true,
+                            message: "Image deleted!",
+                          });
+                        } else {
+                          setOpened(false);
+                          return showNotification({
+                            color: "red",
+                            disallowClose: true,
+                            message: deletedSuccessfully.error,
+                          });
+                        }
+                      }}
+                    >
+                      Yes
+                    </Button>
+                  </Center>
+                </Modal>
+                <Box mt={20}>
+                  {loadedImageUrls.map((url, i) => (
+                    <Image
+                      m={3}
+                      key={`${url}:${i}`}
+                      sx={{
+                        "&:hover": { cursor: "pointer", opacity: 0.8 },
+                        display: "inline-flex",
+                      }}
+                      onClick={() => {
+                        setOpened(true);
+                        setUrlToDelete(url);
+                      }}
+                      src={url}
+                      width={"200px"}
+                    />
+                  ))}
+                </Box>
+
+                <Box mt={20}>
+                  {imageUrls.map((url, i) => (
+                    <Image
+                      m={3}
+                      key={i}
+                      sx={{ display: "inline-grid" }}
+                      src={url}
+                      width={"200px"}
+                    />
+                  ))}
+                </Box>
+                <DropzoneInput
+                  setInfoHasBeenEdited={setInfoHasBeenEdited}
+                  setImageUrls={setImageUrls}
+                  imageUrls={imageUrls}
+                />
                 <Center
                   mt={10}
                   sx={{ justifyContent: "space-between", gap: 10 }}
@@ -129,6 +229,7 @@ const Page = () => {
             setPinIsCorrect={setPinIsCorrect}
             path={router?.query?.path as string}
             setData={setData}
+            setLoadedImageUrls={setLoadedImageUrls}
           />
         )}
       </Center>
@@ -153,3 +254,24 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
   return { props: {} };
 };
+
+// const storageRef = ref(
+//   storage,
+//   `gs://${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/photo_ids/${router.query.path}|${file.name}`
+// );
+
+// const uploadTask = uploadBytesResumable(storageRef, file);
+// uploadTask.on(
+//   "state_changed",
+//   () => {},
+//   (err) => {
+//     console.log(err.message);
+//   },
+//   () => {
+//     getDownloadURL(uploadTask.snapshot.ref).then(
+//       (url) => {
+//         console.log("got the URL bich:", url);
+//       }
+//     );
+//   }
+// );

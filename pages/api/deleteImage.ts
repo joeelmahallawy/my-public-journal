@@ -4,30 +4,21 @@ import prisma from "../../prisma";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { data, path, pin, image } = JSON.parse(req.body);
-
-    const encryptedData = await encrypt(data);
+    //   image is a single url
+    const { path, pin, image } = JSON.parse(req.body);
 
     const page = await prisma.page.findUnique({ where: { path } });
 
     const decryptedPin = await decrypt(page.pin);
 
+    const newImageUrls = page.imageUrl.filter((url) => url != image);
+
     if (pin !== decryptedPin) throw new Error("Not authorized: Invalid pin");
 
-    // NOTE: This was recntly changed, figure out how to remove a single photo
-    if (image.length)
-      await prisma.page.updateMany({
-        where: { path },
-        data: {
-          body: encryptedData,
-          imageUrl: { set: [...page.imageUrl, ...image] },
-        },
-      });
-    else
-      await prisma.page.updateMany({
-        where: { path },
-        data: { body: encryptedData },
-      });
+    await prisma.page.updateMany({
+      where: { path },
+      data: { imageUrl: { set: newImageUrls } },
+    });
 
     await prisma.$disconnect();
 

@@ -19,6 +19,7 @@
     "@mantine/nprogress": "^5.0.2",
     "@prisma/client": "^4.1.1",
     "@tabler/icons": "^1.78.1",
+    "firebase": "^9.9.2",
     "next": "latest",
     "nextjs-google-analytics": "^2.0.0",
     "openpgp": "^5.3.1",

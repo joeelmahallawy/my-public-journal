@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { storage } from "../../firebase";
 import { decrypt } from "../../helpers";
 import prisma from "../../prisma";
 
