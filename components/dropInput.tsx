@@ -71,7 +71,9 @@ const DropzoneInput = ({
                 setPercent(percent);
               },
               (err) => {
-                alert(err.message);
+                alert(
+                  `Server RESPPNSE:${err.serverResponse} ERROR NAME:${err.name}`
+                );
               },
               () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
