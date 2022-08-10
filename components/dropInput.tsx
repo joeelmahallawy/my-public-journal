@@ -83,7 +83,7 @@ const DropzoneInput = ({
           className={classes.dropzone}
           radius="md"
           accept={[MIME_TYPES.png, MIME_TYPES.svg, MIME_TYPES.jpeg]}
-          maxSize={30 * 1024 ** 2}
+          maxSize={300 * 1024 ** 2}
         >
           <div style={{ pointerEvents: "none" }}>
             <Group position="center">

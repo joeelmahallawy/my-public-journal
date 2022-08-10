@@ -29,6 +29,7 @@ import { storage } from "../firebase";
 import DropzoneInput from "../components/dropInput";
 import { Page } from ".prisma/client";
 import { async } from "@firebase/util";
+import Demo from "../components/input";
 
 const Page = () => {
   const [opened, setOpened] = useState(false);
@@ -45,7 +46,6 @@ const Page = () => {
 
   const [data, setData] = useState<Page>(undefined);
 
-  const [loadedImageUrls, setLoadedImageUrls] = useState<string[]>([]);
   const router = useRouter();
 
   if (isChangingPin) return <ChangePin data={data} />;
@@ -78,7 +78,6 @@ const Page = () => {
                       data: myInfo,
                       path: data.path,
                       pin: data.pin,
-                      // NOTE: now we're passing in array of urls
                       image: imageUrls || [],
                     }),
                   });
@@ -142,11 +141,10 @@ const Page = () => {
                         const deletedSuccessfully = await deleteImage.json();
 
                         if (!deletedSuccessfully.error) {
-                          setLoadedImageUrls([
-                            ...loadedImageUrls.filter(
-                              (url) => url != urlToDelete
-                            ),
+                          setImageUrls([
+                            ...imageUrls.filter((url) => url != urlToDelete),
                           ]);
+
                           setOpened(false);
                           return showNotification({
                             color: "green",
@@ -168,7 +166,7 @@ const Page = () => {
                   </Center>
                 </Modal>
                 <Box mt={20}>
-                  {loadedImageUrls.map((url, i) => (
+                  {/* {loadedImageUrls.map((url, i) => (
                     <Image
                       m={3}
                       key={`${url}:${i}`}
@@ -181,29 +179,39 @@ const Page = () => {
                         setUrlToDelete(url);
                       }}
                       src={url}
-                      width={"200px"}
+                      width={"100%"}
+                      // width={"200px"}
                     />
-                  ))}
+                  ))} */}
                 </Box>
-
+                {console.log(imageUrls)}
                 <Box mt={20}>
                   {imageUrls.map((url, i) => (
                     <Image
+                      onClick={() => {
+                        setOpened(true);
+                        setUrlToDelete(url);
+                      }}
                       m={3}
                       key={i}
-                      sx={{ display: "inline-grid" }}
+                      sx={{
+                        "&:hover": { cursor: "pointer", opacity: 0.8 },
+                        display: "inline-grid",
+                      }}
                       src={url}
-                      width={"200px"}
+                      width={"100%"}
+                      // width={"200px"}
                     />
                   ))}
                 </Box>
-                <DropzoneInput
+                <Demo />
+                {/* <DropzoneInput
                   setInfoHasBeenEdited={setInfoHasBeenEdited}
                   setImageUrls={setImageUrls}
                   imageUrls={imageUrls}
-                />
+                /> */}
                 <Center
-                  mt={10}
+                  mt={15}
                   sx={{ justifyContent: "space-between", gap: 10 }}
                 >
                   <Button
@@ -229,7 +237,7 @@ const Page = () => {
             setPinIsCorrect={setPinIsCorrect}
             path={router?.query?.path as string}
             setData={setData}
-            setLoadedImageUrls={setLoadedImageUrls}
+            setImageUrls={setImageUrls}
           />
         )}
       </Center>

@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         where: { path },
         data: {
           body: encryptedData,
-          imageUrl: { set: [...page.imageUrl, ...image] },
+          imageUrl: { set: [...image] },
         },
       });
     else
