@@ -54,33 +54,38 @@ const DropzoneInput = ({
           sx={{ width: "100%" }}
           openRef={openRef}
           onDrop={(e) => {
-            const storageRef = ref(
-              storage,
-              `gs://${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/photo_ids/${router.query.path}|${e[0].name}`
-            );
+            alert(JSON.stringify(e[0]));
+            try {
+              const storageRef = ref(
+                storage,
+                `gs://${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/photo_ids/${router.query.path}|${e[0].name}`
+              );
 
-            const uploadTask = uploadBytesResumable(storageRef, e[0]);
-            uploadTask.on(
-              "state_changed",
-              (snap) => {
-                const percent = Math.round(
-                  (snap.bytesTransferred / snap.totalBytes) * 100
-                );
+              const uploadTask = uploadBytesResumable(storageRef, e[0]);
+              uploadTask.on(
+                "state_changed",
+                (snap) => {
+                  const percent = Math.round(
+                    (snap.bytesTransferred / snap.totalBytes) * 100
+                  );
 
-                // update progress
-                setPercent(percent);
-              },
-              (err) => {
-                alert(
-                  `Server RESPPNSE:${err.serverResponse} ERROR NAME:${err.name}`
-                );
-              },
-              () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                  setImageUrls([...imageUrls, url]);
-                });
-              }
-            );
+                  // update progress
+                  setPercent(percent);
+                },
+                (err) => {
+                  alert(
+                    `Server RESPPNSE:${err.serverResponse} ERROR NAME:${err.message}`
+                  );
+                },
+                () => {
+                  getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    setImageUrls([...imageUrls, url]);
+                  });
+                }
+              );
+            } catch (err) {
+              alert(`ERROR FROM CATCH BLOCK: ${err.message}`);
+            }
             setInfoHasBeenEdited(true);
           }}
           className={classes.dropzone}
