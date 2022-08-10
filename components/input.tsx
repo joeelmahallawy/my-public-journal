@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, Image, SimpleGrid, Progress } from "@mantine/core";
-import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { Dropzone, IMAGE_MIME_TYPE, MIME_TYPES } from "@mantine/dropzone";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../firebase";
 import { useRouter } from "next/router";
@@ -61,6 +61,11 @@ const ImageInput = ({
 
             setInfoHasBeenEdited(true);
           }}
+          onReject={(err) =>
+            alert(
+              "Error uploading file, please make sure it's an image. If you're still having issues, please contact the developer at: youssef.elmahallawy01@gmail.com"
+            )
+          }
           maxSize={300 * 1024 ** 2}
         >
           <Text align="center">Save images here</Text>

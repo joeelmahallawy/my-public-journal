@@ -31,6 +31,7 @@ import { Page } from ".prisma/client";
 import { async } from "@firebase/util";
 import Demo from "../components/input";
 import ImageInput from "../components/input";
+import { useFullscreen } from "@mantine/hooks";
 
 const Page = () => {
   const [opened, setOpened] = useState(false);
@@ -203,7 +204,6 @@ const Page = () => {
                       }}
                       src={url}
                       width={"100%"}
-                      // width={"200px"}
                     />
                   ))}
                 </Box>
@@ -269,24 +269,3 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
   return { props: {} };
 };
-
-// const storageRef = ref(
-//   storage,
-//   `gs://${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/photo_ids/${router.query.path}|${file.name}`
-// );
-
-// const uploadTask = uploadBytesResumable(storageRef, file);
-// uploadTask.on(
-//   "state_changed",
-//   () => {},
-//   (err) => {
-//     console.log(err.message);
-//   },
-//   () => {
-//     getDownloadURL(uploadTask.snapshot.ref).then(
-//       (url) => {
-//         console.log("got the URL bich:", url);
-//       }
-//     );
-//   }
-// );
