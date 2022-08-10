@@ -38,24 +38,33 @@ const IndexPage = () => {
               width: "30%",
             }}
           >
-            <TextInput
-              mb={10}
-              placeholder="e.g. johndoe123"
-              onChange={(e) => {
-                setPersonalUrl(e.currentTarget.value);
-              }}
-              autoCapitalize="off"
-              autoComplete="off"
-              // autoFocus
+            <Center sx={{ gap: 5 }}>
+              <TextInput
+                placeholder="e.g. johndoe123"
+                onChange={(e) => {
+                  setPersonalUrl(e.currentTarget.value);
+                }}
+                autoCapitalize="off"
+                autoComplete="off"
+                // autoFocus
 
-              autoCorrect="off"
-              spellCheck="false"
-              description="This is the username you set when you first created your note"
-              label="Your username"
-            />
-            <Anchor href={`${getEnvironmentURL()}/${personalUrl}`}>
+                autoCorrect="off"
+                spellCheck="false"
+                description="This is the username you set when you first created your note"
+                label="Your username"
+              />
+              {personalUrl && (
+                <Anchor
+                  mt="auto"
+                  href={`${getEnvironmentURL()}/${personalUrl}`}
+                >
+                  <Button>Go</Button>
+                </Anchor>
+              )}
+            </Center>
+            {/* <Anchor href={`${getEnvironmentURL()}/${personalUrl}`}>
               {getEnvironmentURL().replace("https://www.", "")}/{personalUrl}
-            </Anchor>
+            </Anchor> */}
           </Box>
         ) : (
           <>
