@@ -30,6 +30,7 @@ import DropzoneInput from "../components/dropInput";
 import { Page } from ".prisma/client";
 import { async } from "@firebase/util";
 import Demo from "../components/input";
+import ImageInput from "../components/input";
 
 const Page = () => {
   const [opened, setOpened] = useState(false);
@@ -55,7 +56,9 @@ const Page = () => {
       <Head>
         <title>{router.query.path}</title>
       </Head>
-      <Center sx={{ flexDirection: "column", padding: "0.5%" }}>
+      <Center
+        sx={{ flexDirection: "column", padding: "0.5%", paddingBottom: "5%" }}
+      >
         {pinIsCorrect ? (
           <>
             <Center
@@ -65,7 +68,7 @@ const Page = () => {
                 flexDirection: "column",
                 width: "40%",
                 [tabletWidth]: { width: "80%" },
-                [phoneWidth]: { width: "80%" },
+                [phoneWidth]: { width: "90%" },
               }}
             >
               <form
@@ -184,7 +187,7 @@ const Page = () => {
                     />
                   ))} */}
                 </Box>
-                {console.log(imageUrls)}
+
                 <Box mt={20}>
                   {imageUrls.map((url, i) => (
                     <Image
@@ -204,7 +207,11 @@ const Page = () => {
                     />
                   ))}
                 </Box>
-                <Demo />
+                <ImageInput
+                  setInfoHasBeenEdited={setInfoHasBeenEdited}
+                  setImageUrls={setImageUrls}
+                  imageUrls={imageUrls}
+                />
                 {/* <DropzoneInput
                   setInfoHasBeenEdited={setInfoHasBeenEdited}
                   setImageUrls={setImageUrls}
