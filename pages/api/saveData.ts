@@ -10,6 +10,7 @@ type DataInput = {
   // firstName: string;
   body: string;
   pin: string;
+  images: string[];
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -32,6 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         path: data.path,
         pin: encryptedPin,
         body: encryptedBody,
+        imageUrl: { set: data.images },
       },
     });
 

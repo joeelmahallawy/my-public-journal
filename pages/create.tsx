@@ -11,6 +11,9 @@ import {
   Alert,
   Button,
   Anchor,
+  SimpleGrid,
+  Image,
+  Progress,
 } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 
@@ -19,8 +22,25 @@ import { getEnvironmentURL, phoneWidth, tabletWidth } from "../helpers";
 import { useForm } from "@mantine/form";
 import PinInput from "react-pin-input";
 import Head from "next/head";
+import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../firebase";
+import { useRouter } from "next/router";
 
 const CreatePage = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [percent, setPercent] = useState(undefined);
+  const [imageUrls, setImageUrls] = useState([]);
+  const previews = files.map((file, index) => {
+    const imageUrl = URL.createObjectURL(file);
+    return (
+      <Image
+        key={index}
+        src={imageUrl}
+        imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }}
+      />
+    );
+  });
   const form = useForm({
     initialValues: {
       path: "",
@@ -34,7 +54,7 @@ const CreatePage = () => {
   const [hasSubmitted, sethasSubmitted] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -56,19 +76,19 @@ const CreatePage = () => {
               [phoneWidth]: { fontSize: "24px" },
             }}
           >
-            Create your own secure note
+            MySecureNote
           </Title>
           <Text
             color="dimmed"
             size="sm"
             sx={{ textAlign: "center", [phoneWidth]: { fontSize: "12px" } }}
           >
-            Save some of your most urgent contacts/info in a url that you'll
-            easily remember
+            Save some info in a URL so that you can access it from anywhere with
+            any device
           </Text>
+          {console.log(imageUrls)}
           <form
             onSubmit={form.onSubmit(async (values) => {
-              console.log(values);
               setIsLoading(true);
               if (values.pin.length !== 4) {
                 setIsLoading(false);
@@ -81,7 +101,7 @@ const CreatePage = () => {
 
               const sendData = await fetch(`/api/saveData`, {
                 method: "POST",
-                body: JSON.stringify(values),
+                body: JSON.stringify({ ...values, images: imageUrls }),
               });
               const response = await sendData.json();
               if (response.error) {
@@ -189,6 +209,49 @@ const CreatePage = () => {
                 Anything you save here will be fully encrypted
               </Text>
             </Center>
+
+            <Dropzone
+              mt="1.5%"
+              accept={IMAGE_MIME_TYPE}
+              // onDrop={(e) => setFiles([...files, ...e])}
+              onDrop={(e) => {
+                const storageRef = ref(
+                  storage,
+                  `gs://${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/photo_ids/${router.query.path}|${e[0].name}`
+                );
+                const uploadTask = uploadBytesResumable(storageRef, e[0]);
+                uploadTask.on(
+                  "state_changed",
+                  (snap) => {
+                    const percent = Math.round(
+                      (snap.bytesTransferred / snap.totalBytes) * 100
+                    );
+                    // update progress
+                    setPercent(percent);
+                  },
+                  (err) => {
+                    console.log(err.message);
+                  },
+                  () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                      setImageUrls([...imageUrls, url]);
+                    });
+                  }
+                );
+                setFiles([...files, ...e]);
+              }}
+            >
+              <Text align="center">Upload images here</Text>
+            </Dropzone>
+            <Progress mt={5} value={percent} />
+
+            <SimpleGrid
+              cols={4}
+              breakpoints={[{ maxWidth: "sm", cols: 1 }]}
+              mt={previews.length > 0 ? "xl" : 0}
+            >
+              {previews}
+            </SimpleGrid>
 
             <Input.Wrapper mt={10} id="pin" label="Pin" required>
               <PinInput

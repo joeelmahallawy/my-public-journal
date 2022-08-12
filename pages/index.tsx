@@ -20,10 +20,14 @@ import { getEnvironmentURL, phoneWidth, tabletWidth } from "../helpers";
 import { useForm } from "@mantine/form";
 import PinInput from "react-pin-input";
 import Head from "next/head";
+import HomePage from "../components/Layout/home";
+import Landing from "../components/Layout";
 
 const IndexPage = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [personalUrl, setPersonalUrl] = useState("");
+  return <Landing />;
+
   return (
     <>
       <Head>

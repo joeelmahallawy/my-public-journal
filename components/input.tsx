@@ -68,7 +68,7 @@ const ImageInput = ({
           }
           maxSize={300 * 1024 ** 2}
         >
-          <Text align="center">Save images here</Text>
+          <Text align="center">Upload images here</Text>
           <Text align="center" size="sm" color="dimmed">
             Upload your driver's license or photo ID
           </Text>
