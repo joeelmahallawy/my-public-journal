@@ -263,7 +263,7 @@ const CreatePage = () => {
                 type="numeric"
                 inputMode="number"
                 inputStyle={{ borderColor: "black" }}
-                inputFocusStyle={{ borderColor: "blue" }}
+                inputFocusStyle={{ borderColor: "darkblue" }}
                 autoSelect={true}
                 regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
               />

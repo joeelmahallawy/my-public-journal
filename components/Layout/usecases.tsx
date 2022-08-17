@@ -1,15 +1,37 @@
 import { Box, Center, List, Text, Title, Divider, Image } from "@mantine/core";
 import demo from "../../assets/demo.png";
 import React from "react";
+import logo from "../../assets/mysecurenote-logo.png";
+import { phoneWidth, tabletWidth } from "../../helpers";
 
 const UseCases = () => {
   return (
     <Box>
-      <Box p="3% 3% 0">
-        <Title sx={{ fontSize: "50px", fontWeight: 800 }} mb={10}>
+      <Box
+        p="3% 3% 0"
+        sx={{
+          [phoneWidth]: { paddingBottom: "3%" },
+          [tabletWidth]: { paddingBottom: "3%" },
+        }}
+      >
+        <Title
+          sx={{
+            fontSize: "50px",
+            fontWeight: 800,
+            [phoneWidth]: { fontSize: "36px", padding: "3%" },
+            [tabletWidth]: { fontSize: "36px", padding: "3%" },
+          }}
+          mb={10}
+        >
           Use cases:
         </Title>
-        <Title order={2}>
+        <Title
+          sx={{
+            [phoneWidth]: { fontSize: "18px" },
+            [tabletWidth]: { fontSize: "18px" },
+          }}
+          order={2}
+        >
           <List.Item>
             Phone died and you need to call your friend
             <List withPadding listStyleType="disc">
@@ -62,14 +84,38 @@ const UseCases = () => {
       </Box>
       <Box mt="3%" sx={{ width: "100%" }}>
         <Divider />
-        <Center p="2%" sx={{ justifyContent: "space-between" }}>
-          <Text>(LOGO HERE)</Text>
+        <Center
+          p="2%"
+          sx={{
+            justifyContent: "space-between",
+            [phoneWidth]: { fontSize: "12px" },
+            [tabletWidth]: { fontSize: "12px" },
+          }}
+        >
+          {/* <Text>(LOGO HERE)</Text> */}
+          <Center
+            sx={{ "&:hover": { cursor: "pointer" }, gap: 5 }}
+            onClick={() =>
+              typeof window !== "undefined" &&
+              window.scrollTo({ behavior: "smooth", top: 0, left: 0 })
+            }
+          >
+            <Image
+              src={logo.src}
+              sx={{
+                [phoneWidth]: { width: "18px" },
+                [tabletWidth]: { width: "18px" },
+                width: "40px",
+              }}
+            />
+            MySecureNote
+          </Center>
           <Text>&copy; Copyright 2022</Text>
           <a
             style={{ color: "white", textDecoration: "none" }}
             href="mailto:youssef.elmahallawy01@gmail.com"
           >
-            Contact
+            Contact us
           </a>
         </Center>
       </Box>

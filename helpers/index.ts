@@ -60,3 +60,7 @@ export const laptopWidth = `@media only screen and (min-width: ${sizes.lg}px) an
 
 // monitors
 export const monitorWidth = `@media (min-width: ${sizes.xxl}px)`;
+
+// const createPhoneStyles=(property:string,value:string)=>{
+//   return `${[]}`
+// }

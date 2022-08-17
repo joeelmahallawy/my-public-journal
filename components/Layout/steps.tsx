@@ -10,15 +10,36 @@ import {
 } from "@mantine/core";
 import React from "react";
 import demo from "../../assets/demo.png";
+import { phoneWidth, tabletWidth } from "../../helpers";
 
 const Steps = () => {
   return (
     <Box
       //   p="3% 5% 3% 5%"
       p={0}
-      sx={{ flexDirection: "column", marginTop: "3%" }}
+      sx={{
+        flexDirection: "column",
+        marginTop: "3%",
+        [phoneWidth]: {
+          paddingBottom: "2%",
+          marginTop: "5%",
+        },
+        [tabletWidth]: {
+          paddingBottom: "2%",
+          marginTop: "5%",
+        },
+      }}
     >
-      <Title p="0 3% 3%" sx={{ fontWeight: 800, textAlign: "left" }}>
+      <Title
+        p="0 3% 3%"
+        sx={{
+          fontWeight: 900,
+
+          textAlign: "left",
+          [phoneWidth]: { fontSize: "18px" },
+          [tabletWidth]: { fontSize: "18px" },
+        }}
+      >
         <span style={{ color: "red" }}>Problem: </span>
         <span style={{ fontWeight: 400 }}>
           Tired of logging in to apps to get access to some private file, image,
@@ -33,17 +54,28 @@ const Steps = () => {
       </Title>
       <Box
         p="3% 3%"
-        sx={{ background: "white", color: "black", width: "100%" }}
+        sx={{
+          background: "white",
+          color: "black",
+          width: "100%",
+          //   marginTop: "3%",
+          [phoneWidth]: { marginTop: "5%" },
+          [tabletWidth]: { marginTop: "5%" },
+        }}
       >
         <Box
           mr="auto"
           sx={{
             width: "35%",
+            [phoneWidth]: { width: "80%" },
+            [tabletWidth]: { width: "80%" },
           }}
         >
           <Title
             sx={{
               fontSize: "48px",
+              [phoneWidth]: { fontSize: "30px" },
+              [tabletWidth]: { fontSize: "30px" },
             }}
           >
             A quick and{" "}
@@ -131,14 +163,26 @@ const Steps = () => {
             />
           </Stepper>
         </Center>
-        <Center mt="5%">
+        <Center
+          mt="5%"
+          sx={{
+            [phoneWidth]: { marginBottom: "5%", marginTop: "7.5%" },
+            [tabletWidth]: { marginBottom: "5%", marginTop: "7.5%" },
+          }}
+        >
           <a href="/create">
             <Image
               p={10}
               pt={20}
               src={demo.src}
-              sx={{ border: "0.5px solid gray", borderRadius: 10 }}
-              width={600}
+              sx={{
+                border: "0.5px solid gray",
+                borderRadius: 10,
+                [phoneWidth]: { width: "300px" },
+                [tabletWidth]: { width: "300px" },
+                width: 600,
+              }}
+              //   width={600}
             />
           </a>
         </Center>

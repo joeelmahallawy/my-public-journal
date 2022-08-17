@@ -1,37 +1,22 @@
-import PinInput from "react-pin-input";
 import {
   Button,
   Image,
   Center,
-  Loader,
-  Title,
   Text,
   Box,
   Textarea,
   Modal,
 } from "@mantine/core";
-import {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  GetServerSidePropsResult,
-  Redirect,
-} from "next";
+import { GetServerSidePropsContext } from "next";
 import React, { useEffect, useState } from "react";
-import { useAsyncFn } from "react-use";
 import { getEnvironmentURL, phoneWidth, tabletWidth } from "../helpers";
 import { showNotification } from "@mantine/notifications";
 import EnterPin from "../components/enterPin";
 import ChangePin from "../components/changePin";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { storage } from "../firebase";
-
-import DropzoneInput from "../components/dropInput";
 import { Page } from ".prisma/client";
-import { async } from "@firebase/util";
-import Demo from "../components/input";
 import ImageInput from "../components/input";
-import { useFullscreen } from "@mantine/hooks";
 
 const Page = () => {
   const [opened, setOpened] = useState(false);
