@@ -86,7 +86,7 @@ const CreatePage = () => {
             Save some info in a URL so that you can access it from anywhere with
             any device
           </Text>
-          {console.log(imageUrls)}
+
           <form
             onSubmit={form.onSubmit(async (values) => {
               setIsLoading(true);

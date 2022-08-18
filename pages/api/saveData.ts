@@ -22,7 +22,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     if (doesThePathExist)
-      throw new Error("This url already exists, please choose another one.");
+      throw new Error(
+        "This username already exists, please choose another one."
+      );
 
     // since the encrypt function returns an object, we turn it into string so we can store it in DB
     const encryptedBody = await encrypt(data.body);

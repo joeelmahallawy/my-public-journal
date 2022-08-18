@@ -33,11 +33,12 @@ const UseCases = () => {
           order={2}
         >
           <List.Item>
-            Phone died and you need to call your friend
+            Phone died and you need to call someone but can't remember their
+            number
             <List withPadding listStyleType="disc">
               <Title sx={{ color: "#B0B0B0" }} order={5}>
                 <List.Item>
-                  Save their number, and get it from any device
+                  Save their number online and get it from any device
                 </List.Item>
 
                 {/* <List.Item>Check it from a person's phone</List.Item> */}
@@ -46,40 +47,40 @@ const UseCases = () => {
             </List>
           </List.Item>
           <List.Item>
-            Don't want to carry your ID
+            Personal protected vault
             <List withPadding listStyleType="disc">
               <Title sx={{ color: "#B0B0B0" }} order={5}>
                 <List.Item>
-                  Upload your photo ID and use it when needed
+                  Save personal things and show friends "your personal vault"
                 </List.Item>
                 {/* <List.Item>Use it when needed</List.Item> */}
               </Title>
             </List>
           </List.Item>
           <List.Item>
+            Upload photo ID and always be able to prove your identity
+            {/* <List withPadding listStyleType="disc">
+              <Title sx={{ color: "#B0B0B0" }} order={5}>
+                <List.Item>
+                  Upload your photo ID and use it when needed
+                </List.Item>
+                
+              </Title>
+            </List> */}
+          </List.Item>
+          <List.Item>
             Get access to QR codes from any device
-            <List withPadding listStyleType="disc">
+            {/* <List withPadding listStyleType="disc">
               <Title sx={{ color: "#B0B0B0" }} order={5}>
                 <List.Item>
                   Upload QR codes online so that you don't need to worry about
                   saving it on a specific device
                 </List.Item>
-                {/* <List.Item>Use it when needed</List.Item> */}
+               
               </Title>
-            </List>
+            </List> */}
           </List.Item>
-          <List.Item>
-            Personal public vault
-            <List withPadding listStyleType="disc">
-              <Title sx={{ color: "#B0B0B0" }} order={5}>
-                <List.Item>
-                  Save whatever you want and show your friends your personal
-                  vault
-                </List.Item>
-                {/* <List.Item>Use it when needed</List.Item> */}
-              </Title>
-            </List>
-          </List.Item>
+          <List.Item>Save event tickets</List.Item>
         </Title>
       </Box>
       <Box mt="3%" sx={{ width: "100%" }}>

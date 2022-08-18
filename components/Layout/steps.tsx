@@ -19,7 +19,7 @@ const Steps = () => {
       p={0}
       sx={{
         flexDirection: "column",
-        marginTop: "3%",
+        marginTop: "1%",
         [phoneWidth]: {
           paddingBottom: "2%",
           marginTop: "5%",
@@ -42,14 +42,16 @@ const Steps = () => {
       >
         <span style={{ color: "red" }}>Problem: </span>
         <span style={{ fontWeight: 400 }}>
-          Tired of logging in to apps to get access to some private file, image,
-          or info?
+          {/* Tired of losing in to apps to get access to some private file, image,
+          or info? */}
+          Phone's dead and you want to call someone but can't remember their
+          number?
         </span>
         <Space h="sm" />
         <span style={{ color: "#19E043" }}>Solution: </span>
         <span style={{ fontWeight: 400 }}>
-          Upload them to a pin-protected public URL and get access to it from
-          any device.
+          Upload their number to a public (but protected) URL and get access to
+          it from any device.
         </span>
       </Title>
       <Box

@@ -196,11 +196,12 @@ const HomePage = () => {
                 marginTop: 10,
                 [phoneWidth]: { fontSize: "12px", marginTop: 15 },
                 [tabletWidth]: { fontSize: "12px", marginTop: 15 },
+                textAlign: "center",
               }}
               color="dimmed"
             >
-              Tons of people are using MySecureNote to upload some notes to the
-              public internet for quick access
+              Tons of people are using MySecureNote to upload encrypted notes to
+              the internet and access from any device
             </Text>
           </Center>
           <Center sx={{ marginTop: "2%" }}>
