@@ -89,6 +89,10 @@ const Page = () => {
                 }}
                 style={{ width: "100%" }}
               >
+                <Text>
+                  <span style={{ fontWeight: 800 }}>Total page visits:</span>{" "}
+                  {data.totalVisits}
+                </Text>
                 <Textarea
                   mt={10}
                   required
@@ -222,6 +226,7 @@ const Page = () => {
                 </Center>
               </form>
             </Center>
+            {console.log("some data:", data)}
           </>
         ) : (
           <EnterPin

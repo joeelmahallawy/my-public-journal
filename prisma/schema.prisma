@@ -11,10 +11,11 @@ datasource db {
 }
 
 model Page {
-  id        String   @id @default(uuid())
-  imageUrl  String[]
-  pin       String
-  path      String   @unique
-  body      String
-  createdAt DateTime @default(now())
+  id          String   @id @default(uuid())
+  imageUrl    String[]
+  pin         String
+  path        String   @unique
+  body        String
+  createdAt   DateTime @default(now())
+  totalVisits Int      @default(0)
 }

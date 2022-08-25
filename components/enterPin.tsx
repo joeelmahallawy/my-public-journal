@@ -52,6 +52,12 @@ const EnterPin = ({
               message: data.error,
             });
           } else {
+            // UPDATE NUMBER OF TOTAL VISITS
+            await fetch(`/api/updateVisits`, {
+              method: "PUT",
+              body: JSON.stringify({ path, pin: e }),
+            });
+
             setData(data);
             setImageUrls([...data.imageUrl]);
             setMyInfo(data.body);
