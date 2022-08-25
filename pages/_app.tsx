@@ -6,7 +6,9 @@ import { NotificationsProvider } from "@mantine/notifications";
 import { sizes } from "../helpers";
 import { GoogleAnalytics, usePageViews } from "nextjs-google-analytics";
 import Script from "next/script";
-
+import icon from "../assets/mysecurenote-ico.ico";
+import { DefaultSeo } from "next-seo";
+import { createSEOConfig } from "../helpers/seo";
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
@@ -19,6 +21,7 @@ export default function App(props: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
+        <link rel="icon" href={icon.src} />
         <title>Page title</title>
         <meta
           name="viewport"
@@ -48,6 +51,7 @@ export default function App(props: AppProps) {
           {/* <GoogleAnalytics
             gaMeasurementId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE}
           /> */}
+          <DefaultSeo {...createSEOConfig()} />
           <Component {...pageProps} />
         </NotificationsProvider>
       </MantineProvider>
