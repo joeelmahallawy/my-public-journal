@@ -1,6 +1,6 @@
 import React from "react";
 import { NextSeoProps } from "next-seo";
-import logo from "../../assets/mysecurenote-logo.png";
+import logo from "../assets/mysecurenote-logo.png";
 
 const config = {
   author: "Youssef El Mahallawy",
