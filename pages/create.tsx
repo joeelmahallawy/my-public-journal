@@ -16,7 +16,6 @@ import {
   Progress,
 } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
-
 import React, { useState } from "react";
 import { getEnvironmentURL, phoneWidth, tabletWidth } from "../helpers";
 import { useForm } from "@mantine/form";
